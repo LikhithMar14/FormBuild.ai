@@ -30,6 +30,7 @@ export const generateForm = async (prevState: unknown, formData: FormData) => {
     }
 
     const description = validatedData.data.description;
+    console.log("Description:" ,description)
 
     if (!process.env.GEMINI_API_KEY) {
       return { success: false, message: "GEMINI API key not found" };
@@ -43,7 +44,7 @@ export const generateForm = async (prevState: unknown, formData: FormData) => {
       return { success: false, message: "Failed to initialize generative AI model" };
     }
 
-    const prompt = `Generate a JSON response for a form with the following structure. Ensure the keys and format remain constant in every response.
+    const prompt =`Generate a JSON response for a form with the following structure. Ensure the keys and format remain constant in every response.
 {
   "formTitle": "string", // The title of the form
   "formFields": [        // An array of fields in the form
@@ -55,15 +56,18 @@ export const generateForm = async (prevState: unknown, formData: FormData) => {
   ]
 }
 Requirements:
-- Button !!importnat dont forget this
+- Button !!importnat dont forget this outside formFields
 - Use only the given keys: "formTitle", "formFields", "label", "name", "placeholder , "required" , "type".
 - Always include at least 3 fields in the "formFields" array.
 - Keep the field names consistent across every generation for reliable rendering.
 - Provide meaningful placeholder text for each field based on its label..
+- Use radio buttons and file uploads also when required
+- 
 
-Thanks for helping me out Bruh
 
-    Description: "${description}"`;
+    Description: "${description} "
+    
+`
 
     const tunedPrompt = prompt.slice(0, 1000);
 

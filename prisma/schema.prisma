@@ -5,7 +5,7 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model Form {
@@ -26,3 +26,5 @@ model Submission {
   form      Form     @relation(fields: [formId], references: [id])
   content   Json
 }
+
+

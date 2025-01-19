@@ -2,7 +2,7 @@
 import { useFormStatus } from "react-dom";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Sparkles } from "lucide-react";
+import { Loader2, Sparkles } from "lucide-react";
 import { ChangeEvent, useActionState, useEffect, useState } from "react";
 import { generateForm } from "@/actions/generateForm";
 import toast from "react-hot-toast";
@@ -71,7 +71,7 @@ const SubmitButton = () => {
       className="h-12 bg-gradient-to-r from-blue-500 to bg-purple-600"
     >
       <Sparkles className="mr-2" fill="yellow" />
-      {pending ? <span>Generating form ...</span> : "Generate form"}
+      {pending ? <div className="flex items-center gap-x-1"><Loader2 className="animate-spin h-4 w-4"/>Generating form ...</div> : "Generate form"}
     </Button>
   );
 };
